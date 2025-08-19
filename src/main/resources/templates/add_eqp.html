@@ -1,0 +1,588 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>srtdash - SEO Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/metisMenu.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/slicknav.min.css">
+    <!-- amchart css -->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <!-- others css -->
+    <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="stylesheet" href="assets/css/default-css.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <!-- modernizr css -->
+    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+function rand()
+{
+
+// Generate a random 6-digit OTP
+ const randomid = Math.floor(100000 + Math.random() * 900000);
+
+document.getElementById("randomid").value=randomid;
+
+}
+</script>
+    
+    
+    
+</head>
+
+<body onload="rand()">
+
+
+   <script src="https://maps.google.com/maps/api/js?sensor=false"> </script> 
+ 
+      
+        
+<script type="text/javascript"> 
+ var lat,lng;
+
+        function getLocation(){ 
+           
+
+
+
+         var api_key = '042c0b6fa38f411b88aba5ad3dbfb515';
+
+
+        var query =document.getElementById("eqAddress").value;
+
+          // forward geocoding example (address to coordinate)
+          // var query = 'Philipsbornstr. 2, 30165 Hannover, Germany';
+          // note: query needs to be URI encoded (see below)
+
+          var api_url = 'https://api.opencagedata.com/geocode/v1/json'
+
+          var request_url = api_url
+            + '?'
+            + 'key=' + api_key
+            + '&q=' + encodeURIComponent(query)
+            + '&pretty=1'
+            + '&no_annotations=1';
+
+          // see full list of required and optional parameters:
+          // https://opencagedata.com/api#required-params
+
+          var request = new XMLHttpRequest();
+          request.open('GET', request_url, true);
+
+          request.onload = function() {
+            // see full list of possible response codes:
+            // https://opencagedata.com/api#codes
+
+            if (request.status === 200){
+              // Success!
+              var data = JSON.parse(request.responseText);
+              alert(data.results[0].formatted); // print the location
+        var lat=data.results[0].geometry.lat;
+        var lng=data.results[0].geometry.lng;
+ var lattlong = new google.maps.LatLng(lat, lng); 
+        
+
+document.getElementById("latitude").value=lat;
+ document.getElementById("longitude").value=lng ;
+
+
+
+
+        console.log(data);
+        console.log(lat);
+        console.log(lng);
+initialize(lat,lng) ;
+
+
+            } else if (request.status <= 500){
+              // We reached our target server, but it returned an error
+
+              console.log("unable to geocode! Response code: " + request.status);
+              var data = JSON.parse(request.responseText);
+              console.log('error msg: ' + data.status.message);
+            } else {
+              console.log("server error");
+            }
+          };
+
+          request.onerror = function() {
+            // There was a connection error of some sort
+            console.log("unable to connect to server");
+          };
+
+          request.send();  // make the request
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+ </script> 
+
+
+<script type="text/javascript">
+function initialize(lat,lng) 
+{
+	
+
+
+
+// put latitude and longitude data here
+   var latinfo = new google.maps.LatLng(lat,lng);
+   var map = new google.maps.Map(document.getElementById('map'), {
+      center: latinfo,
+      zoom: 13
+    });
+    var marker = new google.maps.Marker({
+      map: map,
+      position: latinfo,
+      draggable: false,
+      animation: google.maps.Animation.BOUNCE,
+      anchorPoint: new google.maps.Point(0, -29)
+   });
+    var infowindow = new google.maps.InfoWindow();   
+    google.maps.event.addListener(marker, 'click', function() 
+    {
+      var iwContent = '<div id="pop_window">' + '<div><b>Location</b> : Connaught Place, New Delhi</div></div>';
+      // put content to the infowindow
+      infowindow.setContent(iwContent);
+      // show infowindow in the google map and at the current marker location
+      infowindow.open(map, marker);
+    });
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+ 
+ 
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- preloader area start -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- preloader area end -->
+    <!-- page container area start -->
+    <div class="page-container">
+        <!-- sidebar menu area start -->
+        <div class="sidebar-menu">
+            <div class="sidebar-header">
+                <div class="logo">
+             <a href="index.html"><h1><font color="white">AERMS</font></h1></a>
+                </div>
+            </div>
+           
+           
+           
+           
+ <th:block th:replace="vendorleftmenu ::vendorleftmenu"></th:block>
+          
+ 
+            
+            <th:block th:replace="vendortopmenu ::vendortopmenu"></th:block>
+            
+            
+            
+            <!-- page title area end -->
+            
+            
+            
+                     <div class="login-area">
+        <div class="container">
+            <div class="login-box ptb--100">
+          <form action="#" th:action="@{/addEqp}"  th:object="${AddEquipment}" method="post" enctype="multipart/form-data" class="form-horizontal">        
+ 
+       
+                    <div class="login-form-head">
+                        <h4>Add Equipment</h4>
+                     
+                    </div>
+                    <div class="login-form-body">
+                       
+              
+        <div class="form-gp">
+                            <label for="exampleInputName1">Equipment Id</label>
+                            <input type="text" id="randomid" name="randomid">
+                           <div class="text-danger"></div>
+                        </div>
+                              
+                       
+                        <div class="form-gp">
+                            <label for="exampleInputName1">Equipment Name</label>
+                            <input type="text" id="exampleInputName1" name="eqName"    pattern="[A-Za-z_ ]+" title="Enter Valid Name "   required="required">
+                           <div class="text-danger"></div>
+                        </div>
+                        
+                        
+                        
+                           <div class="form-gp">
+                            <label for="exampleInputName1">Equipment Description</label>
+                            <input type="text" id="exampleInputName1" name="eqpdesc"    pattern="[A-Za-z_ ]+" title="Enter Valid Description "   required="required">
+                           <div class="text-danger"></div>
+                        </div>
+                        
+                        
+                           <div class="form-gp">
+                            <label for="exampleInputName1">Price  per Hr</label>
+                            <input type="text" id="exampleInputName1" name="price"    pattern="[0-9]+" title="Enter Valid price  "   required="required">
+                           <div class="text-danger"></div>
+                        </div>
+                        
+                        
+                        
+                           <div class="form-gp">
+                            <label for="exampleInputName1">Address</label>
+                            <input type="text" id="eqAddress" name="eqAddress"  required="required"> 
+                         
+                            <div class="text-danger"></div>
+                        </div>
+                        
+                          <div class="form-gp">
+                            <label for="exampleInputName1">contact number</label>
+                            <input type="text" id="exampleInputName1" name="contactNumber"   pattern="[0-9]{10}" title="Plz Enter valid phone  Number" required="required">
+                          
+                            <div class="text-danger"></div>
+                        </div>
+                        
+                       <div class="form-gp">
+                            <label for="exampleInputName1">latitude</label>
+                            <textarea id="latitude" name="latitude" required="required"></textarea>
+                         
+                            <div class="text-danger"></div>
+                        </div>
+                        
+                         <div class="form-gp">
+                            <label for="exampleInputName1">longitude</label>
+                            <textarea id="longitude" name="longitude" required="required"></textarea>
+                         
+                            <div class="text-danger"></div>
+                        </div>
+                        
+                        
+                        <div><a href="javascript:getLocation()">Get Location</a>
+                                 <h2 id="error"></h2> 
+                             </div>
+                             
+                             
+                             
+                                <div class="form-gp">
+                            <label for="exampleInputName1">Map</label>
+                            <br>
+                             <div id="map" style="width:60%; height: 200px; margin-left: 100px;"></div> 
+       
+                            <div class="text-danger"></div>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        
+                             
+                         
+                         <div class="form-gp">
+                            <label for="exampleInputName1">Upload Photo</label><BR>
+                          
+                            <input type="file"   name="img" accept="image/*" class="form-control-file" required="required">
+                         
+                            <div class="text-danger"></div>
+                        </div>
+                        
+                        
+                     
+                     
+                           
+                        
+                        
+                      <div class="submit-btn-area">
+                            <button id="form_submit" type="submit" class="fb-login">Add</button>
+                            <div class="login-other row mt-4">
+                                <div class="col-6">
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-footer text-center mt-5">
+     
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- login area end -->
+            
+            
+            
+            
+            
+            
+        
+        </div>
+        <!-- main content area end -->
+        <!-- footer area start-->
+        <footer>
+            <div class="footer-area">
+                <p>© Copyright 2018. All right reserved. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.</p>
+            </div>
+        </footer>
+        <!-- footer area end-->
+    </div>
+    <!-- page container area end -->
+    <!-- offset area start -->
+    <div class="offset-area">
+        <div class="offset-close"><i class="ti-close"></i></div>
+        <ul class="nav offset-menu-tab">
+            <li><a class="active" data-toggle="tab" href="#activity">Activity</a></li>
+            <li><a data-toggle="tab" href="#settings">Settings</a></li>
+        </ul>
+        <div class="offset-content tab-content">
+            <div id="activity" class="tab-pane fade in show active">
+                <div class="recent-activity">
+                    <div class="timeline-task">
+                        <div class="icon bg1">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <div class="tm-title">
+                            <h4>Rashed sent you an email</h4>
+                            <span class="time"><i class="ti-time"></i>09:35</span>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio itaque at.
+                        </p>
+                    </div>
+                    <div class="timeline-task">
+                        <div class="icon bg2">
+                            <i class="fa fa-check"></i>
+                        </div>
+                        <div class="tm-title">
+                            <h4>Added</h4>
+                            <span class="time"><i class="ti-time"></i>7 Minutes Ago</span>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet consectetur.
+                        </p>
+                    </div>
+                    <div class="timeline-task">
+                        <div class="icon bg2">
+                            <i class="fa fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="tm-title">
+                            <h4>You missed you Password!</h4>
+                            <span class="time"><i class="ti-time"></i>09:20 Am</span>
+                        </div>
+                    </div>
+                    <div class="timeline-task">
+                        <div class="icon bg3">
+                            <i class="fa fa-bomb"></i>
+                        </div>
+                        <div class="tm-title">
+                            <h4>Member waiting for you Attention</h4>
+                            <span class="time"><i class="ti-time"></i>09:35</span>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio itaque at.
+                        </p>
+                    </div>
+                    <div class="timeline-task">
+                        <div class="icon bg3">
+                            <i class="ti-signal"></i>
+                        </div>
+                        <div class="tm-title">
+                            <h4>You Added Kaji Patha few minutes ago</h4>
+                            <span class="time"><i class="ti-time"></i>01 minutes ago</span>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio itaque at.
+                        </p>
+                    </div>
+                    <div class="timeline-task">
+                        <div class="icon bg1">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <div class="tm-title">
+                            <h4>Ratul Hamba sent you an email</h4>
+                            <span class="time"><i class="ti-time"></i>09:35</span>
+                        </div>
+                        <p>Hello sir , where are you, i am egerly waiting for you.
+                        </p>
+                    </div>
+                    <div class="timeline-task">
+                        <div class="icon bg2">
+                            <i class="fa fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="tm-title">
+                            <h4>Rashed sent you an email</h4>
+                            <span class="time"><i class="ti-time"></i>09:35</span>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio itaque at.
+                        </p>
+                    </div>
+                    <div class="timeline-task">
+                        <div class="icon bg2">
+                            <i class="fa fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="tm-title">
+                            <h4>Rashed sent you an email</h4>
+                            <span class="time"><i class="ti-time"></i>09:35</span>
+                        </div>
+                    </div>
+                    <div class="timeline-task">
+                        <div class="icon bg3">
+                            <i class="fa fa-bomb"></i>
+                        </div>
+                        <div class="tm-title">
+                            <h4>Rashed sent you an email</h4>
+                            <span class="time"><i class="ti-time"></i>09:35</span>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio itaque at.
+                        </p>
+                    </div>
+                    <div class="timeline-task">
+                        <div class="icon bg3">
+                            <i class="ti-signal"></i>
+                        </div>
+                        <div class="tm-title">
+                            <h4>Rashed sent you an email</h4>
+                            <span class="time"><i class="ti-time"></i>09:35</span>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse distinctio itaque at.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="settings" class="tab-pane fade">
+                <div class="offset-settings">
+                    <h4>General Settings</h4>
+                    <div class="settings-list">
+                        <div class="s-settings">
+                            <div class="s-sw-title">
+                                <h5>Notifications</h5>
+                                <div class="s-swtich">
+                                    <input type="checkbox" id="switch1" />
+                                    <label for="switch1">Toggle</label>
+                                </div>
+                            </div>
+                            <p>Keep it 'On' When you want to get all the notification.</p>
+                        </div>
+                        <div class="s-settings">
+                            <div class="s-sw-title">
+                                <h5>Show recent activity</h5>
+                                <div class="s-swtich">
+                                    <input type="checkbox" id="switch2" />
+                                    <label for="switch2">Toggle</label>
+                                </div>
+                            </div>
+                            <p>The for attribute is necessary to bind our custom checkbox with the input.</p>
+                        </div>
+                        <div class="s-settings">
+                            <div class="s-sw-title">
+                                <h5>Show your emails</h5>
+                                <div class="s-swtich">
+                                    <input type="checkbox" id="switch3" />
+                                    <label for="switch3">Toggle</label>
+                                </div>
+                            </div>
+                            <p>Show email so that easily find you.</p>
+                        </div>
+                        <div class="s-settings">
+                            <div class="s-sw-title">
+                                <h5>Show Task statistics</h5>
+                                <div class="s-swtich">
+                                    <input type="checkbox" id="switch4" />
+                                    <label for="switch4">Toggle</label>
+                                </div>
+                            </div>
+                            <p>The for attribute is necessary to bind our custom checkbox with the input.</p>
+                        </div>
+                        <div class="s-settings">
+                            <div class="s-sw-title">
+                                <h5>Notifications</h5>
+                                <div class="s-swtich">
+                                    <input type="checkbox" id="switch5" />
+                                    <label for="switch5">Toggle</label>
+                                </div>
+                            </div>
+                            <p>Use checkboxes when looking for yes or no answers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- offset area end -->
+    <!-- jquery latest version -->
+    <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
+    <!-- bootstrap 4 js -->
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/metisMenu.min.js"></script>
+    <script src="assets/js/jquery.slimscroll.min.js"></script>
+    <script src="assets/js/jquery.slicknav.min.js"></script>
+
+    <!-- start chart js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <!-- start highcharts js -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <!-- start amcharts -->
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/ammap.js"></script>
+    <script src="https://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    <!-- all line chart activation -->
+    <script src="assets/js/line-chart.js"></script>
+    <!-- all pie chart -->
+    <script src="assets/js/pie-chart.js"></script>
+    <!-- all bar chart -->
+    <script src="assets/js/bar-chart.js"></script>
+    <!-- all map chart -->
+    <script src="assets/js/maps.js"></script>
+    <!-- others plugins -->
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/scripts.js"></script>
+</body>
+
+</html>

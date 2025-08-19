@@ -1,0 +1,84 @@
+<html>
+<head>
+<!-- Bootstrap 5 CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+<!-- Data Table CSS -->
+<link rel='stylesheet' href='https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css'>
+<!-- Font Awesome CSS -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+
+
+</head>
+<body>
+
+
+
+<h1>Vendor Details  </h1>
+<div>
+<table  border="1" id="example" class="table table-striped" >
+        <thead>
+            <tr>
+                                            <th>ID</th>
+                                            <th>Vendor Name</th>
+                                              <th>Vendor Address</th>
+                                              <th>Vendor contactNumber</th>
+                         </tr>
+        </thead>
+       
+
+
+
+ <tbody>
+               <tr th:each="vlist : ${vlist}">
+                                           <td th:text="${vlist.userId}"></td>
+                                            <td th:text="${vlist.VendorName}"></td>
+                                             <td th:text="${vlist.VendorAddress}"></td>
+                                             <td th:text="${vlist.VContactNumber}"></td>
+                                             
+                                                                   </tr>
+                                        
+          </tbody>
+        
+    </table>
+
+</div>
+
+<!-- jQuery -->
+<script src='https://code.jquery.com/jquery-3.7.0.js'></script>
+<!-- Data Table JS -->
+<script src='https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js'></script>
+<script src='https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js'></script>
+<script src='https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js'></script>
+
+<script>
+
+$(document).ready(function() {
+    $('#example').DataTable({
+      //disable sorting on last column
+      "columnDefs": [
+        { "orderable": false, "targets": 5 }
+      ],
+      language: {
+        //customize pagination prev and next buttons: use arrows instead of words
+        'paginate': {
+          'previous': '<span class="fa fa-chevron-left"></span>',
+          'next': '<span class="fa fa-chevron-right"></span>'
+        },
+        //customize number of elements to be displayed
+        "lengthMenu": 'Display <select class="form-control input-sm">'+
+        '<option value="10">10</option>'+
+        '<option value="20">20</option>'+
+        '<option value="30">30</option>'+
+        '<option value="40">40</option>'+
+        '<option value="50">50</option>'+
+        '<option value="-1">All</option>'+
+        '</select> results'
+      }
+    })  
+} );
+
+
+</script>
+
+</body>
+</html>
