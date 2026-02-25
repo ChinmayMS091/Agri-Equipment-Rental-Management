@@ -1,7 +1,5 @@
 # Agri Equipment Rental Management System
 
-![Home Page of the WebSite](Project.png)
-
 Marketplace for renting farm equipment. Users browse and book, vendors list and manage, admins keep it all running.
 
 Quick Overview
